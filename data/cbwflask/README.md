@@ -10,68 +10,129 @@ The code for reprocessing the data is currently maintained by the University of 
 
 # Format and Structure
 
-This archive consists of a set of netCDF files. For information on the netCDF file format see: https://www.unidata.ucar.edu/software/netcdf/
-
 Filenames follow the convention:
 
-```network-instrument_sitecode_species_version.nc```
+```network{-instrument}_sitecode_species_{filetype-}version.nc```
 
-Below is an example of the archive structure showing only methane data at two AGAGE sites, CGO and ZEP:
+Where the elements in curly brackets are optional, depending on the file.
+
+Below is an example of the archive structure, showing only CFC-11 for the AGAGE network. Note that some elements may not apply to this dataset (e.g., baseline flags and individual instruments):
 
 ```
+.
 ├── README.md
-├── event
-│   └── ch4
-│       ├── AGAGE-PICARRO_ZEP_ch4_20240208v1.nc
-│       ├── AGAGE-combined_CGO_ch4_20240208v1.nc
-│       ├── baseline_flags
-│       │   ├── AGAGE-PICARRO_ZEP_ch4-git-baseline_20240208v1.nc
-│       │   └── AGAGE-combined_CGO_ch4-git-baseline_20240208v1.nc
-│       └── individual
-│           ├── AGAGE-GAGE-GCMD_CGO_ch4_20240208v1.nc
-│           ├── AGAGE-GCMD_CGO_ch4_20240208v1.nc
-│           ├── AGAGE-PICARRO_CGO_ch4_20240208v1.nc
-│           └── baseline_flags
-│               ├── AGAGE-GAGE-GCMD_CGO_ch4-git-baseline_20240208v1.nc
-│               ├── AGAGE-GCMD_CGO_ch4-git-baseline_20240208v1.nc
-│               └── AGAGE-PICARRO_CGO_ch4-git-baseline_20240208v1.nc
-└── monthly
-    └── ch4
-        ├── AGAGE-PICARRO_ZEP_ch4-monthly_20240208v1.nc
-        ├── AGAGE-combined_CGO_ch4-monthly_20240208v1.nc
-        └── individual
-            ├── AGAGE-GAGE-GCMD_CGO_ch4-monthly_20240208v1.nc
-            ├── AGAGE-GCMD_CGO_ch4-monthly_20240208v1.nc
-            └── AGAGE-PICARRO_CGO_ch4-monthly_20240208v1.nc
+└── cfc-11
+    ├── agage_cgo_cfc-11_20240513.nc
+    ├── agage_cmo_cfc-11_20240513.nc
+    ├── agage_mhd_cfc-11_20240513.nc
+    ├── agage_rpb_cfc-11_20240513.nc
+    ├── agage_smo_cfc-11_20240513.nc
+    ├── baseline-flags
+    │   ├── agage_cgo_cfc-11_git-baseline-20240513.nc
+    │   ├── agage_cmo_cfc-11_git-baseline-20240513.nc
+    │   ├── agage_mhd_cfc-11_git-baseline-20240513.nc
+    │   ├── agage_rpb_cfc-11_git-baseline-20240513.nc
+    │   └── agage_smo_cfc-11_git-baseline-20240513.nc
+    ├── individual-instruments
+    │   ├── agage-ale-gcmd_adr_cfc-11_20240513.nc
+    │   ├── agage-ale-gcmd_cgo_cfc-11_20240513.nc
+    │   ├── agage-ale-gcmd_cmo_cfc-11_20240513.nc
+    │   ├── agage-ale-gcmd_rpb_cfc-11_20240513.nc
+    │   ├── agage-ale-gcmd_smo_cfc-11_20240513.nc
+    │   ├── agage-gage-gcmd_cgo_cfc-11_20240513.nc
+    │   ├── agage-gage-gcmd_cmo_cfc-11_20240513.nc
+    │   ├── agage-gage-gcmd_mhd_cfc-11_20240513.nc
+    │   ├── agage-gage-gcmd_rpb_cfc-11_20240513.nc
+    │   ├── agage-gage-gcmd_smo_cfc-11_20240513.nc
+    │   ├── agage-gcmd_cgo_cfc-11_20240513.nc
+    │   ├── agage-gcmd_mhd_cfc-11_20240513.nc
+    │   ├── agage-gcmd_rpb_cfc-11_20240513.nc
+    │   ├── agage-gcmd_smo_cfc-11_20240513.nc
+    │   ├── agage-gcmd_thd_cfc-11_20240513.nc
+    │   ├── agage-gcms-medusa_cmn_cfc-11_20240513.nc
+    │   ├── agage-gcms-medusa_gsn_cfc-11_20240513.nc
+    │   ├── agage-gcms-medusa_jfj_cfc-11_20240513.nc
+    │   ├── agage-gcms-medusa_zep_cfc-11_20240513.nc
+    │   ├── agage-gcms-mtecimone_cmn_cfc-11_20240513.nc
+    │   ├── baseline-flags
+    │   │   ├── agage-ale-gcmd_adr_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-ale-gcmd_cgo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-ale-gcmd_cmo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-ale-gcmd_rpb_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-ale-gcmd_smo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gage-gcmd_cgo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gage-gcmd_cmo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gage-gcmd_mhd_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gage-gcmd_rpb_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gage-gcmd_smo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcmd_cgo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcmd_mhd_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcmd_rpb_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcmd_smo_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcmd_thd_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcms-medusa_cmn_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcms-medusa_gsn_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcms-medusa_jfj_cfc-11_git-baseline-20240513.nc
+    │   │   ├── agage-gcms-medusa_zep_cfc-11_git-baseline-20240513.nc
+    │   │   └── agage-gcms-mtecimone_cmn_cfc-11_git-baseline-20240513.nc
+    │   └── monthly-baseline
+    │       ├── agage-ale-gcmd_adr_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-ale-gcmd_cgo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-ale-gcmd_cmo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-ale-gcmd_rpb_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-ale-gcmd_smo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gage-gcmd_cgo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gage-gcmd_cmo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gage-gcmd_mhd_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gage-gcmd_rpb_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gage-gcmd_smo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcmd_cgo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcmd_mhd_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcmd_rpb_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcmd_smo_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcmd_thd_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcms-medusa_cmn_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcms-medusa_gsn_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcms-medusa_jfj_cfc-11_monthly-baseline-20240513.nc
+    │       ├── agage-gcms-medusa_zep_cfc-11_monthly-baseline-20240513.nc
+    │       └── agage-gcms-mtecimone_cmn_cfc-11_monthly-baseline-20240513.nc
+    └── monthly-baseline
+        ├── agage_cgo_cfc-11_monthly-baseline-20240513.nc
+        ├── agage_cmo_cfc-11_monthly-baseline-20240513.nc
+        ├── agage_mhd_cfc-11_monthly-baseline-20240513.nc
+        ├── agage_rpb_cfc-11_monthly-baseline-20240513.nc
+        └── agage_smo_cfc-11_monthly-baseline-20240513.nc
+
+
 ```
 
-At the first level, the archive is organised into high-frequency (~hourly) files, in a folder called "event", and monthly baseline averages ("monthly", if available). For the latter, baselines have been estimated using the AGAGE statistical pollution algorithm (see O'Doherty et al., 2001).
+At the first level, the archive is organised by species. The files in this top-level directory are the "default" records that should be sufficient for most users. Here, high-frequency can refer to the instantaneous or integrated observations on gas chromatography systems, and/or hourly averages from optical instruments. These files may be a combination of multiple instruments for some species. 
 
-Within each of these top-level folders are directories containing the data for each species.
+There are sub-directories within each species directory. The ```monthly-baseline``` directory contains monthly mean mole fractions calculated using a pollution algorithm. The individual flags are contained in the ```baseline-flag``` folder. 
 
-Within the species directory, if multiple instruments have measured a species at a single site, there is a **'combined'** .nc file, where individual instruments have been combined to form a continuous record (e.g., for CGO in the above example). Choices on when to switch instruments are provided in the data_combination.xlsx spreadsheet in the agage-archive repository.
-
-Where data have been combined, the individual data files for each instrument can be found in the sub-directory ```individual```.
-
-If a species is only measured on one instrument (e.g., for ZEP in the above), the indiviudal instrument files are in the species folder and do not appear in the ```individual``` folder. Therefore, most users will only be interested in the files contained at the top level of the species file. The "individual" folder is required only if users are interested in indiviudal instrument performance and intercomparison.
-
-The ```baseline``` sub-folders contains the baseline flags associated with each type of ```event``` file (if available).
+The ```individual-instrument``` sub-directory contains files for individual instruments, which may have been combined to for the default files for some species and sites.
 
 # Data Statement:
 
-These data are made available to the scientific community in the belief that their wide use will lead to new scientific insights. The availability of these data does not constitute publication of the data. We rely on the ethics and integrity of the user to ensure that the responsible scientists receive fair credit for their work. If the data are obtained for potential use in a publication or presentation, we should be informed at the outset of this work. If the data are essential to the work, or if an important result or conclusion depends on the data, co-authorship may be appropriate. This should be discussed at an early stage with the contacts listed in the data files. Manuscripts using the data should be sent to these contacts for review before they are submitted for publication so we can ensure that the quality and limitations of the data are accurately represented. Every effort is made to produce the most accurate and precise measurements possible. However, we reserve the right to make corrections to the data based on recalibration of standard gases or for other reasons deemed scientifically justified. We are not responsible for results and conclusions based on use of these data without regard to this warning.
+These data are made available to the scientific community and public to improve understanding of climate change and ozone depletion and to lead to new scientific insights. We rely on the ethics and integrity of the user to ensure that project scientists receive fair credit for their work.
+
+If the data are obtained for potential use in a publication or presentation, dataset PIs should be informed at the outset of the proposed work. PI contact information is located in the file metadata. If the data are essential to the work, co-authorship on publications may be appropriate. Manuscripts using the data should be sent early to the relevant data contacts for review before they are submitted for publication, so we can ensure that the quality and limitations of the data are accurately represented.
+
+Every effort is made to produce the most accurate and precise measurements possible. However, we reserve the right to make corrections to the data based on recalibration of standard gases or for other reasons deemed scientifically justified. We are not responsible for results and conclusions based on use of these data without regard to this warning.
+
+Data used in publications must be included as a supplementary file with the publication.
 
 # Data Reciprocity Agreement
 
-Use of these data implies an agreement to reciprocate. Laboratories making similar measurements agree to make their own data available to the general public and to the scientific community in an equally complete and easily accessible form. Scientists  are encouraged to make available to the community, upon request, their own modelling tools used in the interpretation of the DECC data, namely well documented model code, transport fields, and additional information necessary for other scientists to repeat the work and to run modified versions.
+Use of these data implies an agreement to reciprocate. Laboratories making similar measurements agree to make their own data available to the general public and to the scientific community in an equally complete and easily accessible form. Scientists are encouraged to make available to the community, upon request, their own modelling tools used in the interpretation of the data, namely well documented model code, transport fields, and additional information necessary for other scientists to repeat the work and to run modified versions.
 
 # Acknowledgements
 
-Please thank the listed contacts (who are not already co-authors) for each of the stations whose data is used in your paper.
+Please thank the listed contacts (who are not already co-authors) whose data is used in your paper.
 
 # Citation
  
-(1) Obtain the DOI of the specific version of the DECC data that you have used.
+(1) Obtain the DOI of the specific version of the data that you have used, if available.
 
 # Licence
 
