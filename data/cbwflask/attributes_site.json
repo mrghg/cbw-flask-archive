@@ -2,7 +2,7 @@
     "CBW": {
         "inlet_height": 207,
         "sampling_period": 3600,
-        "inlet_base_elevation": 0,
+        "inlet_base_elevation_masl": 0,
         "inlet_latitude": 51.970258,
         "inlet_longitude": 34.926161,
         "data_owner": "Angelina Wenger, University of Bristol",
